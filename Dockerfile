@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre AS java_provider
+FROM eclipse-temurin:21-jre AS java_provider
 FROM node:20 AS runner
 
 COPY --from=java_provider /opt/java /opt/java
