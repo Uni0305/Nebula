@@ -8,7 +8,6 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  DOCKER_IMAGE: ${{ github.repository }}
 
 jobs:
   build:
@@ -26,6 +25,10 @@ jobs:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Build Environment
+        run: echo "DOCKER_IMAGE=${GITHUB_REPO,,}" >> $GITHUB_ENV
+        env:
+          GITHUB_REPO: ${{ github.repository }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -34,6 +37,4 @@ jobs:
           push: true
           labels: |
             org.opencontainers.image.source = "${{ github.server_url }}/${{ github.repository }}"
-          tags: |
-            ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:latest,
-            ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:latest
