@@ -40,5 +40,5 @@ jobs:
           labels: |
             org.opencontainers.image.source = "${{ github.server_url }}/${{ github.repository }}"
           tags: |
-            ${{ env.DOCKER_REGISTRY }}/${{ steps.setup-build-env.outputs.docker_image }}:latest,
-            ${{ env.DOCKER_REGISTRY }}/${{ steps.setup-build-env.outputs.docker_image }}:${{ github.sha }}
+            ${{ env.DOCKER_REGISTRY }}/${{ steps.setup-build-env.outputs.docker_image }}:${{ github.sha }},
+            ${{ env.DOCKER_REGISTRY }}/${{ steps.setup-build-env.outputs.docker_image }}:latest
