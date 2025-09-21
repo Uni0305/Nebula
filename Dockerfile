@@ -10,7 +10,7 @@ ENV HELIOS_DATA_FOLDER=/var/lib/helios
 
 USER 1000:1000
 WORKDIR /usr/src/app
-ADD . .
+ADD --chown=1000:1000 . .
 
 RUN npm install
 RUN npm run build
