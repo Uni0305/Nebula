@@ -1,5 +1,5 @@
 FROM eclipse-temurin:21-jre AS java_provider
-FROM node:20 AS runner
+FROM node:22 AS runner
 
 COPY --from=java_provider /opt/java /opt/java
 
@@ -8,6 +8,7 @@ ENV ROOT=/etc/nebula
 ENV BASE_URL=http://localhost:8080/
 ENV HELIOS_DATA_FOLDER=/var/lib/helios
 
+USER 1000:1000
 WORKDIR /usr/src/app
 ADD . .
 
