@@ -1,6 +1,8 @@
 FROM eclipse-temurin:21-jre AS java_provider
 FROM node:22 AS runner
 
+RUN npm install -g npm@latest
+
 COPY --from=java_provider /opt/java /opt/java
 
 ENV JAVA_EXECUTABLE=/opt/java/openjdk/bin/java
