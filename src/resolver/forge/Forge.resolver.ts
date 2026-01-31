@@ -25,10 +25,13 @@ export abstract class ForgeResolver extends BaseResolver {
         super(absoluteRoot, relativeRoot, baseUrl)
         this.repoStructure = new RepoStructure(absoluteRoot, relativeRoot, 'forge')
         this.artifactVersion = this.inferArtifactVersion()
-        this.checkSecurity()
     }
 
-    public checkSecurity(): void {
+    public async initSecurity(): Promise<void> {
+        await this.checkSecurity()
+    }
+
+    public async checkSecurity(): Promise<void> {
         const major = this.minecraftVersion.getMajor()
         const minor = this.minecraftVersion.getMinor()
 
@@ -78,10 +81,7 @@ export abstract class ForgeResolver extends BaseResolver {
 
             logger.error('To abort, use CTRL + C.')
             logger.error('Nebula will proceed in 15 seconds..')
-            const target = new Date().getTime() + (15*1000)
-            while(new Date().getTime() <= target) {
-                // Wait
-            }
+            await new Promise(resolve => setTimeout(resolve, 15000))
 
         }
 

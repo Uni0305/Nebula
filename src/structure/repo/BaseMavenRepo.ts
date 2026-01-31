@@ -65,6 +65,7 @@ export abstract class BaseMavenRepo extends BaseFileStructure {
         const writer = createWriteStream(localPath)
         request.pipe(writer)
         return new Promise((resolve, reject) => {
+            request.on('error', reject)
             writer.on('finish', () => {
                 BaseMavenRepo.logger.debug(`Completed download of ${url}.`)
                 resolve()
