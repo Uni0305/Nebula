@@ -37,9 +37,12 @@ export class VersionUtil {
             if(left[i] > right[i]) {
                 return true
             }
+            if(left[i] < right[i]) {
+                return false
+            }
         }
 
-        return false
+        return true
     }
 
     public static isPromotionVersion(version: string): boolean {

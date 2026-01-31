@@ -111,7 +111,7 @@ export class FabricResolver extends BaseResolver {
 
         const fabricModule = modules[index]
         fabricModule.type = Type.Fabric
-        modules.splice(index)
+        modules.splice(index, 1)
 
         fabricModule.subModules = modules
 
