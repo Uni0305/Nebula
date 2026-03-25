@@ -28,7 +28,7 @@ export class NeoForgeResolver extends BaseResolver {
     private static readonly logger = LoggerUtil.getLogger('NeoForgeResolver')
     private static readonly WILDCARD_NEOFORM_VERSION = '${formVersion}'
 
-    protected readonly REMOTE_REPOSITORY = 'https://maven.neoforged.net/'
+    protected readonly REMOTE_REPOSITORY = 'https://maven.neoforged.net/releases/'
 
     protected repoStructure: RepoStructure
     private generatedFiles: GeneratedFile[] | undefined
