@@ -74,9 +74,7 @@ export class VersionUtil {
     }
 
     public static async getNeoForgeVersionIndex(): Promise<NeoForgeVersionIndex> {
-        const response = await got.get<NeoForgeVersionIndex>({
-            method: 'get',
-            url: 'https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/neoforge',
+        const response = await got.get<NeoForgeVersionIndex>('https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/neoforge', {
             responseType: 'json'
         })
         return response.body
