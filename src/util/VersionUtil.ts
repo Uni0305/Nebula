@@ -67,9 +67,7 @@ export class VersionUtil {
     }
 
     public static async getPromotionIndex(): Promise<PromotionsSlim> {
-        const response = await got.get<PromotionsSlim>({
-            method: 'get',
-            url: 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json',
+        const response = await got.get<PromotionsSlim>('https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json', {
             responseType: 'json'
         })
         return response.body
@@ -156,36 +154,28 @@ export class VersionUtil {
     // Fabric
 
     public static async getFabricInstallerMeta(): Promise<FabricInstallerMeta[]> {
-        const response = await got.get<FabricInstallerMeta[]>({
-            method: 'get',
-            url: 'https://meta.fabricmc.net/v2/versions/installer',
+        const response = await got.get<FabricInstallerMeta[]>('https://meta.fabricmc.net/v2/versions/installer', {
             responseType: 'json'
         })
         return response.body
     }
 
     public static async getFabricLoaderMeta(): Promise<FabricLoaderMeta[]> {
-        const response = await got.get<FabricLoaderMeta[]>({
-            method: 'get',
-            url: 'https://meta.fabricmc.net/v2/versions/loader',
+        const response = await got.get<FabricLoaderMeta[]>('https://meta.fabricmc.net/v2/versions/loader', {
             responseType: 'json'
         })
         return response.body
     }
 
     public static async getFabricGameMeta(): Promise<FabricVersionMeta[]> {
-        const response = await got.get<FabricVersionMeta[]>({
-            method: 'get',
-            url: 'https://meta.fabricmc.net/v2/versions/game',
+        const response = await got.get<FabricVersionMeta[]>('https://meta.fabricmc.net/v2/versions/game', {
             responseType: 'json'
         })
         return response.body
     }
 
     public static async getFabricProfileJson(gameVersion: string, loaderVersion: string): Promise<FabricProfileJson> {
-        const response = await got.get<FabricProfileJson>({
-            method: 'get',
-            url: `https://meta.fabricmc.net/v2/versions/loader/${gameVersion}/${loaderVersion}/profile/json`,
+        const response = await got.get<FabricProfileJson>(`https://meta.fabricmc.net/v2/versions/loader/${gameVersion}/${loaderVersion}/profile/json`, {
             responseType: 'json'
         })
         return response.body

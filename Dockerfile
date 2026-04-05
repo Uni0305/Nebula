@@ -1,18 +1,19 @@
 FROM eclipse-temurin:21-jre AS java_provider
 FROM node:22 AS runner
 
-RUN npm install -g npm@latest
+ENV UID=1000 \
+    GID=1000 \
+    JAVA_EXECUTABLE=/opt/java/openjdk/bin/java \
+    ROOT=/etc/nebula \
+    BASE_URL=http://localhost:8080/ \
+    HELIOS_DATA_FOLDER=/var/lib/helios
 
 COPY --from=java_provider /opt/java /opt/java
 
-ENV JAVA_EXECUTABLE=/opt/java/openjdk/bin/java
-ENV ROOT=/etc/nebula
-ENV BASE_URL=http://localhost:8080/
-ENV HELIOS_DATA_FOLDER=/var/lib/helios
-
-USER 1000:1000
+USER ${UID}:${GID}
 WORKDIR /usr/src/app
-ADD --chown=1000:1000 . .
+ADD --chown=${UID}:${GID} . .
 
 RUN npm install
 RUN npm run build
+ENTRYPOINT [ "npm", "run", "faststart" ]

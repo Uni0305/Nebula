@@ -59,7 +59,7 @@ export abstract class BaseMavenRepo extends BaseFileStructure {
 
     public async downloadArtifactDirect(url: string, path: string): Promise<void> {
         BaseMavenRepo.logger.debug(`Downloading ${url}..`)
-        const request = got.stream.get({ url })
+        const request = got.stream.get(url)
         const localPath = resolve(this.containerDirectory, path)
         await mkdirs(dirname(localPath))
         const writer = createWriteStream(localPath)
@@ -88,9 +88,7 @@ export abstract class BaseMavenRepo extends BaseFileStructure {
     private async headArtifactBase(url: string, relative: string): Promise<boolean> {
         const resolvedURL = new URL(relative, url).toString()
         try {
-            const response = await got.head({
-                url: resolvedURL
-            })
+            const response = await got.head(resolvedURL)
             return response.statusCode === 200
         } catch (ignored) {
             return false
