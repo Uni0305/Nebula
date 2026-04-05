@@ -16,3 +16,4 @@ ADD --chown=${UID}:${GID} . .
 
 RUN npm install
 RUN npm run build
+ENTRYPOINT [ "npm", "run", "faststart" ]
