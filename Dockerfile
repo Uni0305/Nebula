@@ -8,8 +8,6 @@ ENV UID=1000 \
     BASE_URL=http://localhost:8080/ \
     HELIOS_DATA_FOLDER=/var/lib/helios
 
-RUN npm install -g npm@latest
-
 COPY --from=java_provider /opt/java /opt/java
 
 USER ${UID}:${GID}
