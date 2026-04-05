@@ -20,7 +20,11 @@ dotenv.config()
 const logger = LoggerUtil.getLogger('Index')
 
 function getRoot(): string {
-    return resolvePath(process.env.ROOT!)
+    const root = process.env.ROOT
+    if (!root) {
+        throw new Error('ROOT environment variable is not set')
+    }
+    return resolvePath(root)
 }
 
 function getHeliosDataFolder(): string | null {
@@ -31,7 +35,11 @@ function getHeliosDataFolder(): string | null {
 }
 
 function getBaseURL(): string {
-    let baseUrl = process.env.BASE_URL!
+    const baseUrlEnv = process.env.BASE_URL
+    if (!baseUrlEnv) {
+        throw new Error('BASE_URL environment variable is not set')
+    }
+    let baseUrl = baseUrlEnv
     // Users must provide protocol in all other instances.
     if (!baseUrl.includes('//')) {
         if (baseUrl.toLowerCase().startsWith('localhost')) {
