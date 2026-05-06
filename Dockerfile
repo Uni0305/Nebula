@@ -1,5 +1,5 @@
-FROM eclipse-temurin:21-jre AS java_provider
-FROM node:22 AS runner
+FROM eclipse-temurin:25-jre AS java_provider
+FROM node:24 AS runner
 
 ENV UID=1000 \
     GID=1000 \
