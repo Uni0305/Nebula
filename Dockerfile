@@ -10,6 +10,8 @@ ENV UID=1000 \
 
 COPY --from=java_provider /opt/java /opt/java
 
+RUN npm update -g
+
 USER ${UID}:${GID}
 WORKDIR /usr/src/app
 ADD --chown=${UID}:${GID} . .
